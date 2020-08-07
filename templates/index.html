@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomainGenerator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Domain Name Generator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/About">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div class="container">
+        <form method="POST" action="/generate">
+            <input type="text" name="raw_text" class="form-control" required="true">
+            <br>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            <button type="reset" class="btn btn-primary mb-2">Clear</button>
+            <a href="{{url_for('index')}}" class="btn btn-success mb-2">Reset</a>
+        </form>
+      </div>
+      <div class="container">
+        <ul class="list-group">
+          <li class="list-group-item">Text: {{raw_text}}</li>
+          <li class="list-group-item">Original Text: {{old_text}}</li>
+          <li class="list-group-item">Word Stats: {{word_stats}}</li>
+        </ul>
+      </div>
+
+      <br>
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card" style="text-align: center; background-color: #d7eaea; color: #22559c; padding-top: 15px; padding-bottom: 15px; padding-right: 10px; padding-left: 10px;">
+              <h5>Enter your search</h5>
+              <p>Add one or several keywords that will help generate your new domain ideas. It can be any mix of letters or an actual word. Get creative!</p>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="col-sm-4">
+            <div class="card" style="text-align: center; background-color: #d7eaea; color: #22559c; padding-top: 15px; padding-bottom: 15px; padding-right: 10px; padding-left: 10px;">
+              <h5>Pick a domain</h5>
+              <p>Choose from various blog names from your input. Word combinations, rhymes and random suggestions will pop up.</p>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="col-sm-4">
+            <div class="card" style="text-align: center; background-color: #d7eaea; color: #22559c; padding-top: 15px; padding-bottom: 15px; padding-right: 10px; padding-left: 10px;">
+              <h5>Register new domain</h5>
+              <p>Click on View Details to learn more about how you can register the domain idea you like, find a list with&nbsp;<a rel="noopener" href="https://themeisle.com/blog/best-domain-registrars/" target="_blank">best domain registrars</a>&nbsp;here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <div class="container">
+        <div class="row">
+     <div class="col-sm-4">
+       <div class="card" style="background-color: #ff5da2;">
+         <div class="card-body">
+           <h5 class="card-title">Common Domains</h5>
+           <p class="card-text">Most Used Domain Extensions</p>
+          <ul class="list-group">{% for i in cust_list_common %}
+               <li class="list-group-item">{{i}}</li>
+               {%endfor %}
+           </ul>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-4">
+       <div class="card" style="background-color: #fce850;">
+         <div class="card-body">
+           <h5 class="card-title">New Domains</h5>
+           <p class="card-text">New Domain Extensions</p>
+           <ul class="list-group">{% for i in cust_list_new %}
+               <li class="list-group-item">{{i}}</li>
+               {%endfor %}
+           </ul>
+         </div>
+       </div>
+     </div>
+       <div class="col-sm-4">
+       <div class="card" style="background-color: #124e96;">
+         <div class="card-body">
+           <h5 class="card-title">Extra Domains</h5>
+           <p class="card-text">Extra Domain Names</p>
+           <ul class="list-group">{% for i in cust_list_extra %}
+               <li class="list-group-item">{{i}}</li>
+               {%endfor %}
+           </ul>
+         </div>
+       </div>
+     </div>
+   </div>
+   </div>
+   <br/>
+   <br/>
+   <div class="container">
+        <div class="row">
+     <div class="col-sm-4">
+       <div class="card" style="background-color: #fd0054;">
+         <div class="card-body">
+           <h5 class="card-title">Prefixed Domains</h5>
+           <p class="card-text">Domain Name starting with</p>
+          <ul class="list-group">{% for i in cust_list_prefix %}
+               <li class="list-group-item">{{i}}</li>
+               {%endfor %}
+           </ul>
+         </div>
+       </div>
+     </div>
+         <div class="col-sm-4">
+       <div class="card" style="background-color: #86a6df;">
+         <div class="card-body">
+           <h5 class="card-title">Shuffled Domains</h5>
+           <p class="card-text">New Domain Name Shuffled</p>
+           <ul class="list-group">{% for i in cust_list_shuffled %}
+               <li class="list-group-item">{{i}}</li>
+               {%endfor %}
+           </ul>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-4">
+       <div class="card" style="background-color: #ee5a5a;">
+         <div class="card-body">
+           <h5 class="card-title">Suffixed Domains</h5>
+           <p class="card-text">New Domain Name ending with</p>
+           <ul class="list-group">{% for i in cust_list_suffix %}
+               <li class="list-group-item">{{i}}</li>
+               {%endfor %}
+           </ul>
+         </div>
+       </div>
+     </div>
+   
+   </div>
+   </div>
+
+   <br>
+   <br>
+   <br>
+
+   <footer class="container py-5" style="background-color: #daeaf6; text-align: center; padding-left: 50px; padding-right: 50px;">
+    <div class="row">
+      <div class="col-6 col-md">
+        <ul>
+          <h5>Pages</h5>
+          <p class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+          </p>
+          <p class="nav-item active">
+            <a class="nav-link" href="/About">About</a>
+          </p>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <ul>
+          <h5>Resources</h5>
+          <p><a href="https://citinstitute.tech" target="_blank">@2020 CIT</a></p>
+          <p><a href="https://github.com/iCodeElijah/CITWebProject" target="_blank">GitHub Repository</a></p>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</body>
+</html>
